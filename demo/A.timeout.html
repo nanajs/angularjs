@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/angular.js"></script>
+</head>
+<body ng-app="myApp">
+  <div ng-controller="MyController">
+    <input type="text" ng-model="person.name" placeholder="your name">
+    <h1>Hello {{person.name}}</h1>
+<h1>{{clock.now}}</h1>
+  </div>
+
+  <script>
+    var myApp = angular.module('myApp',[]);
+    myApp.controller('MyController',function($scope, $timeout) {
+      // <h1>{{clock}}</h1>
+      /* var updatedClock = function () {
+        $scope.clock = new Date();
+        $timeout(function () {
+          updatedClock();
+        }, 1000)
+      }
+      updatedClock(); */
+      $scope.clock = {
+        now: new Date()
+      }
+      function updatedClock() {
+        $scope.clock.now = new Date();
+      }
+      setInterval(function(){
+        $scope.$apply(updatedClock);
+      },1000);
+      updatedClock();
+    })
+  </script>
+</body>
+
+</html>

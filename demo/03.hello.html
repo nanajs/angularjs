@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>angular hello world</title>
+</head>
+<!-- 2.加上,指定了angular要管理哪一部分的代码 -->
+
+<body ng-app ng-init="myVal='你好。世界'">
+  <!-- 4.显示值 -->
+  <h1>{{myVal}}</h1>
+  <!-- 3.获取文本框的值 -->
+  <input ng-model="myVal" type="text" >
+  <!-- 1.引入对应的文件 -->
+  <script src="./lib/angular.js"></script>
+</body>
+
+</html>

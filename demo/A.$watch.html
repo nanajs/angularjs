@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body ng-app='myApp' ng-controller="myContrl">
+  <div>{{value}}</div>
+  <input type="text" ng-model="value" ng-blur="blur()">
+  <script src="./lib/angular.js"></script>
+  <script>
+    angular.module('myApp', []).controller('myContrl', ['$scope', '$parse',
+      function ($scope, $parse) {
+        // $watch可以监视数据模型的变化
+        //第一个参数：数据模型对应的名字，（字符串形式）
+        // 第二个参数，相应的数据模型发生变化就会调用这个函数
+        //默认会直接执行一次回掉函数
+        $scope.value = 'name';
+        $scope.$watch('value', function (now, old, scope) {
+          //第一个参数是变化后的值
+          //第二个参数是变化前的值
+          $scope.blur = function () {
+            if (now !== old) {
+              console.log('different');
+            }
+          }
+        });
+        //也能够监视$scope.属性方法中的返回值
+        //$watch监视的是$scope中的属性，如果是一个普通变量是无法监视的
+      }
+    ])
+  </script>
+</body>
+
+</html>

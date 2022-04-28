@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>control</title>
+</head>
+<!-- 2.加ng-app指令 -->
+
+<body ng-app="window">
+  <!-- 5.在需要显示的数据上加上控制器的名字 -->
+  <div ng-controller="demo">{{testName}}</div>
+{{test}}
+  <!-- 1.引入js文件 -->
+  <script src="./lib/angular.js"></script>
+  <script>
+    //3.创建模块
+    var win = angular.module('window', []);
+    //4.创建控制器
+    //第一个参数：是一个名字
+    //第二个参数，是个回掉函数
+    win.controller('demo', function ($scope) {
+      $scope.testName = '笑话';
+      $scope.test = '笑话';
+    })
+  </script>
+</body>
+
+</html>

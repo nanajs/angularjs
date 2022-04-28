@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+  <div>遍历数组</div>
+  <ul>
+    <li ng-repeat="item in arr track by $index">
+      {{item}},{{$index}}
+    </li>
+  </ul>
+  <div>遍历对象</div>
+  <ul>
+    <li ng-repeat="item in obj track by $index">
+      {{item.id}},{{item.name}}
+    </li>
+  </ul>
+  <script src="./lib/angular.js"></script>
+  <script>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('myCtrl', ['$scope', function ($scope) {
+      $scope.arr = [1, 2, 3, 4, 5]
+      $scope.obj = {
+        1:{id: 1, name: 'a'},
+        2:{id: 1, name: 'b'},
+    3:{id: 1, name: 'c'},
+        4:{id: 1, name: 'd'}
+      }
+    }])
+  </script>
+</body>
+
+</html>

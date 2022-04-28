@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body ng-app="myApp">
+  <h2>{{name}}</h2>
+  <div ng-controller="myContrl">
+    <h2>{{name1}}</h2>
+  </div>
+  <script src="./lib/angular.js"></script>
+  <script>
+    angular.module('myApp', []).run(function ($rootScope) {
+      $rootScope.name = 'aa';
+    }).controller('myContrl', function ($scope,$rootScope) {
+      $scope.name1 = 'world';
+      $rootScope.name = 'hello';
+      $scope.name = 'hello1';
+    })
+  </script>
+</body>
+
+</html>

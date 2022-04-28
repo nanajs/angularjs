@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>angular加法计算器</title>
+</head>
+
+<body ng-app>
+<h1>加法计算器</h1>
+<p>我们使用了angular技术,指令:ng-app,ng-model,ng-click表达式</p>
+<input type="text" ng-model="cal1">+
+<input type="text" ng-model="cal2">
+<input type="button" value="=" ng-click="result = (cal1-0) +(cal2 -0)">
+<input type="text" ng-model="result">
+<script src="./lib/angular.js"></script>
+</body>
+
+</html>

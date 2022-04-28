@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>注册页面</title>
+</head>
+
+<body ng-app="myApp">
+  <!-- view开始 -->
+  <table ng-controller="demoController">
+    <tr>
+      <td>用户名：
+        <input type="text" ng-model="username">
+      </td>
+    </tr>
+    <!-- <tr>
+      <td>用户类型：
+        <input type="text" ng-model="usertype">
+      </td>
+    </tr> -->
+    <tr>
+        <td>用户类型下拉：
+          <select ng-model="usertype">
+            <option value='options1'>学生</option>
+            <option value='options2'>老师</option>
+            <option value='options3'>明星</option>
+          </select>
+        </td>
+      </tr>
+    <tr>
+      <td>密码：
+        <input type="text" ng-model="userpwd">
+      </td>
+    </tr>
+    <tr>
+      <td>确认密码：
+        <input type="text" ng-model="confirmpwd">
+      </td>
+    </tr>
+    <tr>
+      <td>注册协议：
+        <input type="checkbox">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="button" value="注册" ng-click="register()">
+      </td>
+      <td>{{msg}}</td>
+    </tr>
+  </table>
+  <!-- view结束 -->
+  <script src="./lib/angular.js"></script>
+  <script>
+    // controller开始
+    var app = angular.module('myApp', []);
+    app.controller('demoController', function ($scope) {
+      $scope.username = ''; //不少于6位
+      $scope.usertype = '';
+      $scope.userpwd = ''; //不少于6位
+      $scope.confirmpwd = ''; //不重复
+      $scope.isagree = '';
+      $scope.msg = '';
+      $scope.register = function () {
+        console.log($scope.username)
+        if ($scope.username.length < 6) {
+          $scope.msg = '用户名太短';
+          return;
+        }
+        // 调用model里的方法
+        var u = new User($scope.username, $scope.userpwd, $scope.usertype);
+        var result = u.save();
+        if (result) {
+          $scope.msg = '注册成功';
+        } else {
+          $scope.msg = '注册失败';
+        }
+      }
+    })
+    // controller结束
+
+    // model开始
+    function User(name, pwd, type) {
+      this.name = name
+      this.pwd = pwd
+      this.type = type
+    }
+    User.prototype.save = function () {
+      // 判断用户是否存在
+      var str = localStorage.getItem('myusers') || '[]';
+      var arr = JSON.parse(str);
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].name === this.name) {
+          return;
+        }
+      }
+      arr.push({
+        name: this.name,
+        pw: this.pwd,
+        type: this.type
+      });
+      localStorage.setItem('myusers', JSON.stringify(arr));
+      return true;
+    }
+  </script>
+</body>
+
+</html>

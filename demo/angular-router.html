@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AngularJS.route.js</title>
+</head>
+<body ng-app="Myapp">
+  <div ng-view></div>
+  <div ng-view></div>
+  <script src="./lib/angular.js"></script>
+  <script src="./lib/angular-route.js"></script>
+  <script>
+    //1.创建模块
+   var app = angular.module('Myapp',['ngRoute']);
+   //2. 配置路由规则（约定什么样的锚点值，对应什么样的页面内容
+   //只需要传一个参数，与controller的第二个参数类似
+   app.config(['$routeProvider',function($routeProvider){
+     //第一个参数，对应url中的锚点值
+     //当angular检测到url中的锚点变化时，会自动把template中的内容插入到页面中拥有ng-view指令的标签
+    $routeProvider.when('/name',{
+      template: '<div>我的名字{{name}}</div>',
+      // templateUrl
+      //当前锚点时所执行对应控制器的回调函数
+      controller: 'nameCtrl'
+
+    })
+    .when('/age',{
+      template: '<div>我近年18岁了</div>'
+    })
+   }])
+   app.controller('nameCtrl',['$scope',function($scope){
+    $scope.name = '我是name';
+   }])
+  </script>
+</body>
+</html>

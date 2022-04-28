@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+  <div>{{123.456789 | number:2 }}</div>
+  <div>{{ 123 | currency }}</div>
+  <div>{{ today | date:'medium' }}</div>
+  <div>{{ {'name': 'Ari', 'City': 'SanFrancisco'} | json }} </div>
+  <form action="" name="form">
+    <input class='ng-invalid'ng-spristine type="text" ng-minlength="5" name="inp" />
+    {{form.inp.$pristine}}
+  </form>
+  <script src="./lib/angular.js"></script>
+  <script>
+    angular.module('myApp', []).controller('myController', function ($scope, $pristine) {
+      $scope.today = new Date();
+      console.log(form.inp.$pristine);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>directive</title>
+  <style>
+    .red {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body ng-app='directive'>
+  <h6>以属性形式使用：</h6>
+  <div my-btn mystyle='red'></div>
+  <h6>以样式名形式使用：</h6>
+  <div class="my-btn"></div>
+  <h6>以自定义标签形式使用</h6>
+  <my-btn>随意替换</my-btn>
+
+  <script src="./lib/angular.js"></script>
+  <script id="btn" type="text/ng-template">
+    <div>
+      <p>{{msg}}</p>
+      <button ng-transclude class='{{tmp}}'> 按钮</button>
+    </div>
+  </script>
+  <script>
+    var app = angular.module('directive', []);
+    //创建自定义指令
+    //第一个参数：指令的名字,必须是驼峰命名法
+    //第二个参数：和控制器的第二个参数类似
+    app.directive('myBtn', [function () {
+      //在这里直接return 一个对象就可以了
+      return {
+        //template  封装的UI
+        // template: '<div><button>按钮</button></div>'
+        //A.作用也是提供字符串，对应的内容会被添加到自定义指令所在的位置,值是一个html文件所在的位置
+        // templateUrl:'\demo\directiveDemo.html'
+        //B.值也可以是一个script标签的id
+        templateUrl: 'btn',
+        // restrict:'AC', //Attribute  //Class //Element
+        restrict: 'ACE',
+        replace: true, //取代，替换  为true时，会把模板中的内容替换到自定义上
+        transclude: true, //为true时会把自定义标签中间的内容，插入到指定的模板中
+        //可以得到自定义指令的属性
+        scope: {
+          //@开头表示获取自定义指令属性的值
+          //在对应的模板中可以直接使用{{tmp}}来得到mystyle的值
+          // tmp:'@mystyle'
+          mystyle: '@' //上一行的简写
+
+        },
+        //指定一个function
+        link: function (scope, element, attributes) {
+          //参数：scope:类似于控制器里的$scope,这里的scope是在模板中使用的
+          scope.msg = '我是自己的'
+          //element:指向模板最外层的对象；如果replace为true,指向的就是自定义指令所在的标签
+          console.log(element);
+          element.on('click', function () {
+            console.log('click');
+          })
+          //attributes:这个对象里的属性就是自定义指令所在标签的属性
+          console.log(111);
+        }
+
+
+
+      }
+    }])
+  </script>
+</body>
+
+</html>

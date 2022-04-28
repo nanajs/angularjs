@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>anguler模块</title>
+</head>
+<!-- 2.加上ng-app指令 -->
+<body ng-app='house'>
+  <div>这是</div>
+  <!-- 1.引入文件 -->
+  <script src="./lib/angular.js"></script>
+  <script>
+    // 我们自己提供一个模块，去管理页面
+    // 第一个参数是模块名字
+    // 如果当前模块需要依赖其他模块，就指定第二个参数为数组
+    // 数组中的元素就是我们当前模块依赖的模块
+    angular.module('house', [])
+    // 如果不传递第二个参数，就会变为获取模块
+    var tmp = angular.module('house');
+    console.dir(tmp);
+    angular.module('app', [])
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- 2.添加ng-app -->
+
+<body ng-app="demo" >
+  <div ng-controller="demoController">
+    <input type="text" ng-model="value">
+    <div>你好，{{value}}</div>
+    <input type="button" value="获取$scope.value值" ng-click='getValue()'>
+    <input type="button" value="重置$scope.value值" ng-click='setValue()'>
+  </div>
+  <!-- 1.引入js文件 -->
+  <script src="./lib/angular.js"></script>
+  <script>
+    var demo = angular.module('demo', []);
+    demo.controller('demoController', function ($scope) {
+      $scope.value = '小明';
+      $scope.getValue = function () {
+        console.log($scope.value);
+      };
+      $scope.setValue = function () {
+      $scope.value = '小红';
+
+      }
+
+    })
+  </script>
+</body>
+
+</html>
